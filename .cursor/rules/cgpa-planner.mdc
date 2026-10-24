@@ -1,0 +1,5 @@
+---
+description: CGPA Target Planner project rules
+alwaysApply: true
+---
+Read `AGENTS.md` at the project root first, then `docs/PROGRESS.md`. Follow the "How to continue" steps there. All grade maths lives in `src/engine/engine.js` and is covered by `npm test`. Guest mode must never persist data. Run `npm run check` before finishing and update `docs/PROGRESS.md`.
