@@ -153,4 +153,30 @@ ul.why { margin: 0; padding-left: 18px; display: flex; flex-direction: column; g
 .course-pick-btn { padding: 8px 14px; border-radius: 10px; border: 1.5px solid var(--line); background: #fff; color: var(--ink); font-size: 13px; font-weight: 600; cursor: pointer; min-height: 40px; transition: all .15s; }
 .course-pick-btn:hover { border-color: var(--g); color: var(--g); }
 
+.whatif-header { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.whatif-label { display: block; color: var(--mut); font-size: 13px; margin: 0; }
+.whatif-cgpa { margin: 4px 0 0; font-size: 34px; font-weight: 700; line-height: 1.1; }
+.whatif-track { height: 8px; border-radius: 4px; background: var(--line); overflow: hidden; }
+.whatif-fill { height: 100%; border-radius: 4px; background: var(--g); transition: width .3s ease; }
+.whatif-fill.short { background: var(--amb); }
+.whatif-points { margin: 0; font-size: 13px; font-weight: 700; }
+.whatif-courses { display: flex; flex-direction: column; border: 1.5px solid var(--line); border-radius: 14px; overflow: hidden; }
+.whatif-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid var(--line); min-height: 52px; }
+.whatif-row:last-child { border-bottom: 0; }
+.whatif-course { font-size: 14px; }
+.whatif-course b { font-weight: 600; }
+.whatif-grade-select { width: 56px; height: 44px; border-radius: 10px; border: 1.5px solid var(--line); background: #fff; color: var(--ink); font-weight: 700; font-size: 16px; text-align: center; cursor: pointer; appearance: none; -webkit-appearance: none; padding: 0 4px; }
+.whatif-grade-select.changed { border-color: var(--amb); background: var(--amb-tint); color: var(--amb); }
+.whatif-grade-select:focus-visible { outline: 3px solid var(--g); outline-offset: 2px; }
+
+.install-banner { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 14px; background: var(--tint); border: 1.5px solid #bfe0d0; cursor: pointer; transition: all .15s; }
+.install-banner:hover { background: #d4eddf; }
+.install-banner .install-icon { width: 36px; height: 36px; border-radius: 10px; background: var(--g); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+.install-banner .install-text { flex: 1; }
+.install-banner .install-text b { font-size: 14px; display: block; }
+.install-banner .install-text small { color: var(--mut); font-size: 12px; }
+
+.coming-soon-bar { display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 12px; background: var(--amb-tint); border: 1px solid #ecd9a0; font-size: 13px; color: var(--amb); font-weight: 600; }
+.coming-soon-bar svg { flex-shrink: 0; }
+
 @media (prefers-reduced-motion: reduce) { * { animation-duration: .01ms !important; transition-duration: .01ms !important; } }

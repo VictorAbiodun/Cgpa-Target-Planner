@@ -12,7 +12,7 @@ await build({
 const { render, cases } = await import(pathToFileURL(out).href);
 
 const expect = {
-  welcome: ['CGPA Target Planner', 'Continue without signing in', 'cross-check'],
+  welcome: ['CGPA Target Planner', 'Continue without signing in', 'cross-check', 'coming soon'],
   setup: ['Most units your school allows'],
   stage: ['Where are you in your degree?'],
   results_courses: ['4.36', '14'],
@@ -39,6 +39,8 @@ const expect = {
   crosscheck_match: ['Match'],
   crosscheck_missing: ['Does not match', '2-unit course graded C'],
   crosscheck_points: ['Points differ by 1'],
+  whatif_ontarget: ['What if', 'Projected CGPA', 'On target'],
+  whatif_short: ['What if', 'Projected CGPA', 'short'],
 };
 let ok = 0;
 for (const name of Object.keys(cases)) {

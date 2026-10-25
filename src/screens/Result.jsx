@@ -59,7 +59,7 @@ function ExtraTip({ extra, current, N }) {
 }
 
 export default function Result() {
-  const { state, set, dispatch } = useStore();
+  const { state, set, dispatch, go } = useStore();
   const prev = previous(state);
   const courses = useMemo(() => courseList(state), [state.counts, state.courseOptions]);
   const N = courses.reduce((s, c) => s + c.units, 0);
@@ -188,6 +188,7 @@ export default function Result() {
           ))}
           <p className="note">Floor is the lowest grade in one course if you get A in the rest. Spare points are shared.</p>
           {safe != null && safe < MAX_GP && <p className="note">Or aim for at least a {E.letterOf(safe, E.DEFAULTS)} in every course.</p>}
+          <Btn variant="link" onClick={() => { set({ whatIfGrades: plan.grades }); go('whatif'); }}>Try a what-if ›</Btn>
         </>
       )}
 

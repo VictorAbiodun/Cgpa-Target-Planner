@@ -35,6 +35,8 @@ export const cases = {
   crosscheck_match: { screen: 'crosscheck', entries: T14, school: { mode: 'cgpa', cgpa: '4.36', units: '', points: '' } },
   crosscheck_missing: { screen: 'crosscheck', entries: T14, school: { mode: 'cgpa', cgpa: '4.19', units: '', points: '' } },
   crosscheck_points: { screen: 'crosscheck', entries: T14, school: { mode: 'points', cgpa: '', units: '14', points: '62' } },
+  whatif_ontarget: { screen: 'whatif', stage: 'has', method: 'courses', entries: T14, ...base, target: { mode: 'class', className: 'First Class', cgpa: '' }, whatIfGrades: [5, 5, 5, 5, 5, 5, 5] },
+  whatif_short: { screen: 'whatif', stage: 'has', method: 'courses', entries: T14, ...base, target: { mode: 'class', className: 'First Class', cgpa: '' }, whatIfGrades: [4, 4, 4, 4, 4, 4, 4] },
 };
 
 export function render(name) {

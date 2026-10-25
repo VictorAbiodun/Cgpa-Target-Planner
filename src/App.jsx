@@ -8,6 +8,7 @@ import Target from './screens/Target.jsx';
 import Result from './screens/Result.jsx';
 import CrossCheck from './screens/CrossCheck.jsx';
 import CourseOptions from './screens/CourseOptions.jsx';
+import WhatIf from './screens/WhatIf.jsx';
 
 const SCREENS = {
   welcome: Welcome,
@@ -19,6 +20,7 @@ const SCREENS = {
   result: Result,
   crosscheck: CrossCheck,
   courseoptions: CourseOptions,
+  whatif: WhatIf,
 };
 
 export default function App() {

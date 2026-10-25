@@ -32,7 +32,7 @@ src/
   state/store.jsx         useReducer store + context (screen, navigation stack, inputs)
   derive.js               turns raw screen state into engine inputs (previous P/Q, courses, target)
   components/ui.jsx       Screen, Title, Btn, Chip, ChipRow, Opt, Seg, Field, Card, Pill
-  screens/                Welcome, Setup, Stage, Results, Courses, CourseOptions, Target, Result, CrossCheck
+  screens/                Welcome, Setup, Stage, Results, Courses, CourseOptions, Target, Result, WhatIf, CrossCheck
   styles.css              design tokens and all styles (see docs/DESIGN.md)
 scripts/smoke*.{mjs,jsx}  render-every-screen smoke test
 docs/                     REQUIREMENTS.md, DESIGN.md, PROGRESS.md
@@ -70,9 +70,13 @@ Terms: `P` previous units, `Q` previous quality points, `N` units still to be gr
 | `fmt2`, `letterOf` | formatting helpers |
 
 ## State and flow
-State shape is in `src/state/store.jsx` (`initialState`). Screens: `welcome → setup → stage → (results →) courses → (courseoptions →) target → result`. `crosscheck` is a separate branch from Welcome and from the Results idea. Fresh students (`stage: 'fresh'`) skip `results`. Final-semester students (`stage: 'final'`) see the all-classes overview first on `result`. `previous(state)` in `derive.js` returns `{ok, P, Q, ...}` for whichever entry method is active.
+State shape is in `src/state/store.jsx` (`initialState`). Screens: `welcome → setup → stage → (results →) courses → (courseoptions →) target → result (→ whatif)`. `crosscheck` is a separate branch from Welcome and from the Results idea. Fresh students (`stage: 'fresh'`) skip `results`. Final-semester students (`stage: 'final'`) see the all-classes overview first on `result`. `previous(state)` in `derive.js` returns `{ok, P, Q, ...}` for whichever entry method is active.
 
 **Course options state:** `courseOptions` is an object keyed by the flat course index (0-based, heaviest first, same order as `courseList()`). Each value is `{ status, cap?, floor?, locked?, difficulty? }` where grade values are grade points (integers, e.g. 5 for A). `editingCourseIdx` tracks which course is open in the CourseOptions screen. `courseList()` in `derive.js` enriches each course with these fields before passing to the engine. When a stepper count changes (`setCount`), stale courseOptions beyond the new total are pruned.
+
+**What-if state:** `whatIfGrades` is an array of grade points (one per course in `courseList()` order) passed from the Result screen when the student taps “Try a what-if ›”. The WhatIf screen uses this as the starting point and lets the student adjust grades interactively. All calculations use `E.whatIf`.
+
+**Welcome screen:** shows a “Sign-in is coming soon” amber banner and disables the email/code fields. Captures the browser’s `beforeinstallprompt` event and shows an install banner when the PWA can be installed.
 
 ## Defaults and assumptions (confirm with the owner; they are open decisions)
 5-point scale with E = 1, pass floor E; class thresholds First 4.50, Second Upper 3.50, Second Lower 2.40, Third 1.50, Pass 1.00; a retaken course keeps the old F in the totals (`retake: 'add'`); strict rounding; school maximum units default 24 (asked in Setup, warn never block).
