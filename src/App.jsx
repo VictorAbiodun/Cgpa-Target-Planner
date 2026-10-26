@@ -9,6 +9,7 @@ import Result from './screens/Result.jsx';
 import CrossCheck from './screens/CrossCheck.jsx';
 import CourseOptions from './screens/CourseOptions.jsx';
 import WhatIf from './screens/WhatIf.jsx';
+import { Analytics } from '@vercel/analytics/react';
 
 const SCREENS = {
   welcome: Welcome,
@@ -29,6 +30,11 @@ export default function App() {
   return (
     <div className="app">
       <Current />
-    </div>
+      </div>
+      <Analytics />   {/* add this line */ }
+    </InstallProvider >
+  );
+}
+    </div >
   );
 }
