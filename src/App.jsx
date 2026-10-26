@@ -1,3 +1,4 @@
+
 import { useStore } from './state/store.jsx';
 import Welcome from './screens/Welcome.jsx';
 import Setup from './screens/Setup.jsx';
@@ -27,14 +28,11 @@ const SCREENS = {
 export default function App() {
   const { state } = useStore();
   const Current = SCREENS[state.screen] || Welcome;
+
   return (
     <div className="app">
       <Current />
-      </div>
-      <Analytics />   {/* add this line */ }
-    </InstallProvider >
-  );
-}
-    </div >
+      <Analytics />
+    </div>
   );
 }
