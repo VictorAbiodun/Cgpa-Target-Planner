@@ -30,11 +30,7 @@ export default function App() {
   return (
     <div className="app">
       <Current />
-      </div>
-      <Analytics />   {/* add this line */ }
-    </InstallProvider >
-  );
-}
-    </div >
+      <Analytics />
+    </div>
   );
 }
