@@ -1,6 +1,6 @@
 # Progress log (update this at the end of every session)
 
-Last updated: 2026-10-24 (Course Options screen added)
+Last updated: 2026-10-27 (Added canonical link and Open Graph / Twitter meta tags to index.html)
 
 ## Done
 - [x] Project scaffold: Vite + React + PWA plugin, icons, manifest
