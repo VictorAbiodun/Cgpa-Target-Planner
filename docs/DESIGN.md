@@ -95,9 +95,9 @@ Header step 3. Title "Courses to plan for", subtitle "Add by unit size. Names ar
 Planned (not built): a green link "Set grade limits for a course ›" opening Course options (4.10).
 
 ### 4.6 Target (built, three variants)
-Header step 4. Title "Your target", subtitle "Pick a class of degree, a CGPA, or the best you can do." Segmented control **CGPA | Class of degree | Best I can do**.
-- *Class of degree (default):* three option cards: First Class "4.50 and above", Second Class Upper "3.50 and above", Second Class Lower "2.40 and above". Button "See my plan".
-- *CGPA:* a card with a "Target CGPA" field, hint "On a 5.0 scale. First Class starts at 4.50.", a "Quick picks" label and four chips 4.50, 4.00, 3.50, 3.00.
+Header step 4. Title "Your target", subtitle "Pick a target for your upcoming exams, or see the best you can do." Segmented control **CGPA | Class of degree | Best I can do**.
+- *Class of degree (default):* three option cards: First Class "4.50 and above", Second Class Upper "3.50 and above", Second Class Lower "2.40 and above", plus a grey callout explaining that the target is for upcoming exams to climb toward their degree. Button "See my plan".
+- *CGPA:* a card with a "Target CGPA" field, hint "The CGPA to aim for after your upcoming exams (5.0 scale).", a grey callout box ("Target for upcoming exams, not graduation: This is a target for the exams you’re about to write, not your final graduation CGPA. Your result and recommended grades are planned for these upcoming courses to help you climb steadily toward your desired CGPA."), a "Quick picks" label and four chips 4.50, 4.00, 3.50, 3.00.
 - *Best I can do:* a green tint card, green bold "No target needed", text "We skip the target and show the highest CGPA you can still reach, with the grades that get you there." Button "Show my best result".
 
 ### 4.7 Result (built, several states)

@@ -73,6 +73,10 @@ h3 { margin: 0; font-size: 15px; }
 .card.warn { background: var(--amb-tint); border-color: #ecd9a0; }
 .card.grey { background: var(--grey); border-color: transparent; }
 
+.callout { display: flex; flex-direction: column; gap: 4px; padding: 12px 14px; border-radius: 12px; background: var(--grey); }
+.callout b { font-size: 13px; font-weight: 600; color: var(--ink); }
+.callout p { margin: 0; font-size: 13px; color: var(--mut); line-height: 1.45; }
+
 .chip-row { display: flex; gap: 8px; }
 .chip { flex: 1; min-width: 0; height: 44px; border-radius: 10px; border: 1.5px solid var(--line); background: #fff; color: var(--ink); font-weight: 600; font-size: 15px; transition: all .15s; }
 .chip.sel { border-color: var(--g); background: var(--tint); color: var(--g); }

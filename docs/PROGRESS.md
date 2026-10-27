@@ -1,6 +1,6 @@
 # Progress log (update this at the end of every session)
 
-Last updated: 2026-10-27 (Added canonical link and Open Graph / Twitter meta tags to index.html)
+Last updated: 2026-10-27 (Target screen: added guidance that target is for upcoming exams)
 
 ## Done
 - [x] Project scaffold: Vite + React + PWA plugin, icons, manifest
@@ -38,3 +38,4 @@ Last updated: 2026-10-27 (Added canonical link and Open Graph / Twitter meta tag
 - 2026-10-24: Recorded the local-first storage decision (device cache for signed-in students, backend as durable backup) in AGENTS.md and task 7.
 - 2026-10-24: Built Course Options screen (`src/screens/CourseOptions.jsx`). Added `courseOptions` and `editingCourseIdx` to store. Updated `courseList()` in `derive.js` to pass `cap/floor/locked/difficulty` to the engine. Updated Courses screen with "Set grade limits for a course" link and inline tags showing configured courses. Added 3 smoke test cases (27 total). Fixed `smoke.mjs` Windows path resolution (`fileURLToPath` instead of `URL.pathname`). `npm run check` passes (42 tests, 27 smoke screens, production build).
 - 2026-10-27: Added canonical link and Open Graph / Twitter meta tags to `index.html`. Moved `og-image.jpg` into `public/` so it is served at `/og-image.jpg` and included in `dist/`. `npm run check` passes.
+- 2026-10-27: Target screen (`src/screens/Target.jsx`): Added clear callout notes and updated field hints explaining that the target CGPA is for the student’s upcoming exams (not final graduation CGPA) and that the recommendations help them climb steadily toward their desired CGPA. Added `.callout` styles to `styles.css`. Updated `docs/DESIGN.md`. `npm run check` passes.
