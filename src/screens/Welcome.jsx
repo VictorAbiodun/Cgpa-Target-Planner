@@ -12,6 +12,12 @@ import {
   signOutStudent,
   getAuthErrorMessage,
 } from '../storage/auth.js';
+import {
+  isNotificationSupported,
+  getNotificationPermission,
+  requestNotificationPermission,
+} from '../storage/notifications.js';
+import { VaoLogo } from '../components/VaoLogo.jsx';
 
 function GoogleIcon() {
   return (
@@ -47,6 +53,15 @@ export default function Welcome() {
   const [message, setMessage] = useState(null); // { type: 'ok' | 'err', text: '' }
   const [installPrompt, setInstallPrompt] = useState(null);
   const [installed, setInstalled] = useState(false);
+  const [canNotify, setCanNotify] = useState(false);
+  const [notifGranted, setNotifGranted] = useState(false);
+
+  useEffect(() => {
+    if (isNotificationSupported()) {
+      setCanNotify(true);
+      setNotifGranted(getNotificationPermission() === 'granted');
+    }
+  }, []);
 
   // Check for email magic link arrival
   useEffect(() => {
@@ -176,11 +191,32 @@ export default function Welcome() {
     }
   };
 
+  const handleEnableNotifications = async () => {
+    setMessage(null);
+    const res = await requestNotificationPermission();
+    if (res.status === 'granted') {
+      setNotifGranted(true);
+      setMessage({ type: 'ok', text: 'Notifications enabled! You will receive future updates.' });
+    } else if (res.status === 'denied') {
+      setMessage({ type: 'err', text: 'Notifications were blocked in your browser settings.' });
+    }
+  };
+
   return (
     <Screen back={false}>
       <Grow />
       <Logo />
       <Title big title="CGPA Target Planner" sub="Know the grade you need in every course." />
+
+      {/* What's New Announcement Banner */}
+      {!state.user && (
+        <div className="new-feature-bar" role="status">
+          <span className="new-feature-badge">New</span>
+          <div className="new-feature-text">
+            <b>Sign-in is now live!</b> Create an account or use Google to save your grades and plan across devices.
+          </div>
+        </div>
+      )}
 
       {state.user ? (
         <div className="auth-box">
@@ -237,12 +273,12 @@ export default function Welcome() {
           {authMode === 'magic' ? (
             <form className="auth-form" onSubmit={handleSendMagicLink}>
               <Field
-                label="School email"
+                label="Email"
                 id="magic-email"
                 type="email"
                 inputMode="email"
                 autoComplete="email"
-                placeholder="name@yourschool.edu.ng"
+                placeholder="name@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={loading}
@@ -255,12 +291,12 @@ export default function Welcome() {
           ) : (
             <form className="auth-form" onSubmit={handlePasswordAuth}>
               <Field
-                label="School email"
+                label="Email"
                 id="pwd-email"
                 type="email"
                 inputMode="email"
                 autoComplete="email"
-                placeholder="name@yourschool.edu.ng"
+                placeholder="name@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={loading}
@@ -342,6 +378,19 @@ export default function Welcome() {
         Just cross-check my CGPA
       </Btn>
 
+      {/* Notifications opt-in card */}
+      {canNotify && !notifGranted && (
+        <div className="notif-card" role="region" aria-label="Notification settings">
+          <div className="notif-card-info">
+            <b>Get updates</b>
+            <small>Stay notified about new features and exam tips.</small>
+          </div>
+          <button type="button" className="btn sm secondary" onClick={handleEnableNotifications}>
+            Turn on
+          </button>
+        </div>
+      )}
+
       {/* PWA install banner */}
       {installPrompt && !installed && (
         <button type="button" className="install-banner" onClick={handleInstall}>
@@ -352,6 +401,12 @@ export default function Welcome() {
           </span>
         </button>
       )}
+
+      {/* Powered by VAO */}
+      <div className="powered-by">
+        <span>Powered by</span>
+        <VaoLogo height={16} />
+      </div>
 
       <Grow />
     </Screen>
