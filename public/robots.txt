@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cgpa-target-planner.vercel.app/sitemap.xml

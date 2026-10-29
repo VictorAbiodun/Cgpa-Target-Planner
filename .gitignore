@@ -3,3 +3,8 @@ dist
 dev-dist
 .DS_Store
 .smoke-bundle.mjs
+AGENTS.md
+GEMINI.md
+.env
+.env.local
+.env.*.local
