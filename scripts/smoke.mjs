@@ -8,11 +8,12 @@ await build({
   entryPoints: [fileURLToPath(new URL('./smoke-entry.jsx', import.meta.url))],
   bundle: true, platform: 'node', format: 'esm', outfile: out, jsx: 'automatic', logLevel: 'error',
   banner: { js: "import { createRequire } from 'module'; const require = createRequire(import.meta.url);" },
+  define: { 'import.meta.env': 'process.env' },
 });
 const { render, cases } = await import(pathToFileURL(out).href);
 
 const expect = {
-  welcome: ['CGPA Target Planner', 'Continue without signing in', 'cross-check', 'coming soon'],
+  welcome: ['CGPA Target Planner', 'Continue without signing in', 'cross-check', 'Google'],
   setup: ['Most units your school allows'],
   stage: ['Where are you in your degree?'],
   results_courses: ['4.36', '14'],

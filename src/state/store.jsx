@@ -1,4 +1,12 @@
-import { createContext, useContext, useMemo, useReducer } from 'react';
+import { createContext, useContext, useEffect, useMemo, useReducer } from 'react';
+import { subscribeToAuth } from '../storage/auth.js';
+import {
+  subscribeSyncStatus,
+  debouncedSaveProfile,
+  loadProfileLocally,
+  clearLocalData,
+  requestPersistentStorage,
+} from '../storage/storage.js';
 
 // Guest mode saves nothing: this state lives in memory only (see AGENTS.md).
 export const initialState = {
@@ -17,10 +25,32 @@ export const initialState = {
   editingCourseIdx: null, // index of the course being edited in CourseOptions
   target: { mode: 'class', className: 'First Class', cgpa: '4.50' }, // mode: 'class' | 'cgpa' | 'best'
   school: { mode: 'cgpa', cgpa: '', units: '', points: '' }, // cross-check: the school's own figure
+  user: null, // { uid, email, displayName, photoURL } or null
+  syncStatus: 'idle', // 'idle' | 'saving' | 'synced' | 'error'
 };
 
 function reducer(s, a) {
   switch (a.type) {
+    case 'setUser':
+      return { ...s, user: a.user };
+    case 'setSyncStatus':
+      return { ...s, syncStatus: a.status };
+    case 'loadProfile': {
+      if (!a.profile) return s;
+      return {
+        ...s,
+        maxLoad: a.profile.maxLoad ?? s.maxLoad,
+        stage: a.profile.stage ?? s.stage,
+        method: a.profile.method ?? s.method,
+        summary: a.profile.summary ?? s.summary,
+        points: a.profile.points ?? s.points,
+        entries: a.profile.entries ?? s.entries,
+        semesterNo: a.profile.semesterNo ?? s.semesterNo,
+        counts: a.profile.counts ?? s.counts,
+        courseOptions: a.profile.courseOptions ?? s.courseOptions,
+        target: a.profile.target ?? s.target,
+      };
+    }
     case 'set':
       return { ...s, ...a.patch };
     case 'go':
@@ -64,6 +94,59 @@ const Ctx = createContext(null);
 
 export function StoreProvider({ children, initial }) {
   const [state, dispatch] = useReducer(reducer, { ...initialState, ...(initial || {}) });
+
+  // On client, listen for Firebase Auth state changes
+  useEffect(() => {
+    const unsubAuth = subscribeToAuth(async (user) => {
+      if (user) {
+        requestPersistentStorage();
+        dispatch({
+          type: 'setUser',
+          user: {
+            uid: user.uid,
+            email: user.email,
+            displayName: user.displayName,
+            photoURL: user.photoURL,
+          },
+        });
+        const profile = await loadProfileLocally(user.uid);
+        if (profile) {
+          dispatch({ type: 'loadProfile', profile });
+        }
+      } else {
+        dispatch({ type: 'setUser', user: null });
+      }
+    });
+
+    const unsubSync = subscribeSyncStatus((status) => {
+      dispatch({ type: 'setSyncStatus', status });
+    });
+
+    return () => {
+      unsubAuth();
+      unsubSync();
+    };
+  }, []);
+
+  // When signed in, debounce-save profile changes
+  useEffect(() => {
+    if (state.user && state.user.uid) {
+      debouncedSaveProfile(state.user.uid, state);
+    }
+  }, [
+    state.user,
+    state.maxLoad,
+    state.stage,
+    state.method,
+    state.summary,
+    state.points,
+    state.entries,
+    state.semesterNo,
+    state.counts,
+    state.courseOptions,
+    state.target,
+  ]);
+
   const value = useMemo(
     () => ({ state, dispatch, go: (screen) => dispatch({ type: 'go', screen }), set: (patch) => dispatch({ type: 'set', patch }) }),
     [state]

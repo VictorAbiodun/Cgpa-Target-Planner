@@ -183,4 +183,37 @@ ul.why { margin: 0; padding-left: 18px; display: flex; flex-direction: column; g
 .coming-soon-bar { display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 12px; background: var(--amb-tint); border: 1px solid #ecd9a0; font-size: 13px; color: var(--amb); font-weight: 600; }
 .coming-soon-bar svg { flex-shrink: 0; }
 
+.new-feature-bar { display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border-radius: 12px; background: var(--tint); border: 1.5px solid #bfe0d0; font-size: 13px; line-height: 1.45; text-align: left; }
+.new-feature-badge { background: var(--g); color: #fff; font-size: 10px; font-weight: 700; text-transform: uppercase; padding: 3px 7px; border-radius: 6px; letter-spacing: .04em; flex-shrink: 0; margin-top: 1px; }
+.new-feature-text { color: var(--ink); flex: 1; }
+.new-feature-text b { color: var(--g); font-weight: 700; }
+
+.notif-card { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 14px; border-radius: 12px; background: var(--grey); border: 1px solid var(--line); font-size: 13px; }
+.notif-card-info b { font-size: 13px; display: block; }
+.notif-card-info small { color: var(--mut); font-size: 12px; }
+.notif-card .btn.sm { width: auto; padding: 0 14px; height: 38px; font-size: 13px; }
+
+.google-btn { display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; height: 48px; border-radius: 12px; border: 1.5px solid var(--line); background: #fff; color: var(--ink); font-size: 15px; font-weight: 600; cursor: pointer; transition: background .15s, border-color .15s; }
+.google-btn:hover { background: var(--grey); border-color: #cbd5e1; }
+.google-btn:active { transform: scale(.99); }
+.google-btn:disabled { opacity: .5; cursor: not-allowed; }
+.google-btn svg { width: 20px; height: 20px; flex-shrink: 0; }
+
+.auth-box { display: flex; flex-direction: column; gap: 12px; }
+.auth-form { display: flex; flex-direction: column; gap: 10px; }
+.auth-msg { padding: 10px 14px; border-radius: 12px; font-size: 13px; line-height: 1.4; }
+.auth-msg.ok { background: var(--tint); color: var(--g); border: 1px solid #bfe0d0; }
+.auth-msg.err { background: var(--red-tint); color: var(--red); border: 1px solid var(--red-line); }
+
+.auth-sub-actions { display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
+.auth-toggle-btn { background: none; border: 0; color: var(--g); font-weight: 600; cursor: pointer; padding: 4px 0; text-decoration: underline; }
+
+.account-badge { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 14px; border-radius: 12px; background: var(--tint); border: 1.5px solid #bfe0d0; }
+.account-badge-info { display: flex; flex-direction: column; }
+.account-badge-info b { font-size: 14px; color: var(--ink); }
+.account-badge-info small { font-size: 12px; color: var(--mut); }
+
+.powered-by { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 16px 0 6px; font-size: 12px; font-weight: 600; color: var(--mut); letter-spacing: .02em; }
+.powered-by span { opacity: .75; }
+
 @media (prefers-reduced-motion: reduce) { * { animation-duration: .01ms !important; transition-duration: .01ms !important; } }

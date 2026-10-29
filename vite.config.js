@@ -26,7 +26,8 @@ export default defineConfig({
         ],
       },
       workbox: {
-        navigateFallbackDenylist: [/^\/robots\.txt$/, /^\/sitemap\.xml$/],
+        globIgnores: ['**/firebase-messaging-sw.js'],
+        navigateFallbackDenylist: [/^\/robots\.txt$/, /^\/sitemap\.xml$/, /^\/firebase-messaging-sw\.js$/],
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/fonts\.(googleapis|gstatic)\.com\/.*/i,
